@@ -3,9 +3,10 @@ import json
 import argparse
 import tqdm
 import time
+from nltk.tokenize import sent_tokenize  # NLTK 문장 분해기 사용
 
-def classify_sentences(prompt_template, table_info, gold_description, generated_description, model, api_key):
-    """GPT-4를 사용해 설명을 문장으로 분해하고 문장을 Entailed, Extra, Incorrect, Hallucinated로 분류"""
+def classify_sentences(prompt_template, table_info, generated_description, model, api_key):
+    """GPT-4를 사용해 문장을 테이블과 비교하여 Entailed, Extra, Incorrect, Hallucinated로 분류"""
     # 테이블 정보 준비
     table_caption = table_info['table_caption']
     table_columns = ', '.join(table_info['table_column_names'])
@@ -15,7 +16,6 @@ def classify_sentences(prompt_template, table_info, gold_description, generated_
     prompt = prompt_template.replace('{{TableCaption}}', table_caption)
     prompt = prompt.replace('{{TableColumns}}', table_columns)
     prompt = prompt.replace('{{TableContent}}', table_content)
-    prompt = prompt.replace('{{GoldDescription}}', gold_description)
     prompt = prompt.replace('{{GeneratedDescription}}', generated_description)
     
     # GPT-4 API 호출
@@ -48,8 +48,11 @@ def process_gpt_response(response):
     
     return eval_results
 
-def calculate_metrics(eval_results, gold_statements_count):
-    """각 테이블의 평가 지표(Recall, Precision, Correctness, Hallucination) 계산"""
+def calculate_metrics(eval_results, gold_description):
+    """Recall, Precision, Correctness, Hallucination 계산"""
+    # gold description을 문장 단위로 분해하여 gold 문장 수 계산
+    gold_statements_count = len(sent_tokenize(gold_description))  # 골드 문장의 개수
+    
     entailed_count = sum(1 for res in eval_results if res == 'Entailed')
     extra_count = sum(1 for res in eval_results if res == 'Extra')
     hallucinated_count = sum(1 for res in eval_results if res == 'Hallucinated')
@@ -83,16 +86,16 @@ if __name__ == '__main__':
     for instance in tqdm.tqdm(scigen_data):
         table_id = instance['table_id']
         table_info = instance['table_info']  # 테이블 정보
-        gold_description = instance['gold_description']
+        gold_description = instance['gold_description']  # Gold description 사용해서 문장 개수 계산
         generated_description = instance['generated_description']  # 전체 생성된 설명
         
         try:
             # GPT-4로 문장 분해 및 분류
-            gpt_response = classify_sentences(prompt_template, table_info, gold_description, generated_description, args.model, args.key)
+            gpt_response = classify_sentences(prompt_template, table_info, generated_description, args.model, args.key)
             eval_results = process_gpt_response(gpt_response)  # GPT 응답 처리하여 분류 결과 추출
             
             # 평가 지표 계산
-            recall, precision, correctness, hallucination = calculate_metrics(eval_results, len(gpt_response.split('\n')))
+            recall, precision, correctness, hallucination = calculate_metrics(eval_results, gold_description)
             
             # 테이블 ID를 키로 하고 결과를 저장
             results[table_id] = {
