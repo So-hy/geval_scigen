@@ -3,6 +3,8 @@ import argparse
 import tqdm
 import time
 from nltk.tokenize import sent_tokenize  # NLTK 문장 분해기 사용
+import nltk
+nltk.download('punkt_tab')
 
 def mock_classify_sentences(prompt_template, table_info, generated_description, model, api_key):
     """GPT-4 호출을 생략하고 미리 정의된 모의 응답을 반환"""
