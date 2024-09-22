@@ -67,7 +67,7 @@ def calculate_metrics(eval_results, gold_description):
 if __name__ == '__main__':
     # 인자 처리
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--prompt_fp', type=str, default='prompts/scigen_prompt.txt')
+    argparser.add_argument('--prompt_fp', type=str, default='prompts/summeval/scigen_prompt.txt')
     argparser.add_argument('--save_fp', type=str, default='results/gpt4_scigen_evaluation.json')
     argparser.add_argument('--scigen_fp', type=str, default='data/scigen_data.json')
     argparser.add_argument('--key', type=str, required=True)
