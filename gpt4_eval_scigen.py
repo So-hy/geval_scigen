@@ -18,6 +18,7 @@ def classify_sentences(prompt_template, table_info, generated_description, model
     prompt = prompt_template.replace('{{TableCaption}}', table_caption)
     prompt = prompt.replace('{{TableColumns}}', table_columns)
     prompt = prompt.replace('{{TableContent}}', table_content)
+    prompt = prompt.replace('{{GoldDescription}}', gold_description)
     prompt = prompt.replace('{{GeneratedDescription}}', generated_description)
     
     # GPT-4 API 호출
