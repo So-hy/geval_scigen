@@ -14,3 +14,13 @@ Prompts used to evaluate SummEval are in prompts/summeval
 
 G-eval results on SummEval are in results
 
+
+
+**SciGen** 데이터셋을 테스트하기 위해 일부 코드 수정.
+
+**gpt4_eval_scigen.py** : GEVAL을 활용해 SciGen 연구의 HumanEvaluation을 진행.
+
+**gpt4_eval_test.py** : 실제 GPT 환경에서 작동시키기 전 테스트용
+
+scigen데이터는 gold_description과 generated_description을 test데이터와 합쳐 전처리.
+prompt는 SciGen의 Human Evaluation을 GPT에게 전달할 수 있도록 수정.
