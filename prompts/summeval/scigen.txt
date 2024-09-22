@@ -6,16 +6,16 @@ Please read and understand these instructions carefully. Refer to this document 
 
 Evaluation Criteria:
 
-- **Entailed**: The generated sentence is factually correct based on the table's content.
-- **Extra**: The generated sentence is factually correct but introduces additional information not present in the table.
-- **Incorrect**: The generated sentence is related to the table but factually incorrect.
-- **Hallucinated**: The generated sentence is unrelated to the table's content.
+- **Entailed**: A generated statement that is entailed by the corresponding gold description, i.e., is equivalent to one of the extracted statements from the gold description.
+- **Extra**: A generated statement that is not entailed by the gold description but is factually correct based on the table content.
+- **Incorrect**: A generated statement that is related to the table but is factually incorrect.
+- **Hallucinated**: A generated statement that is irrelevant to the table.
 
 Evaluation Steps:
 
-1. Read the table and understand its content.
+1. Read the gold description and the table to understand their content.
 2. Split the system-generated description into individual sentences.
-3. Compare each sentence in the system-generated description to the content of the table.
+3. Compare each sentence in the system-generated description to the gold description and the table.
 4. Classify each sentence into one of the following categories: Entailed, Extra, Incorrect, or Hallucinated.
 
 Example:
@@ -25,6 +25,10 @@ Table:
 - Caption: {{TableCaption}}
 - Columns: {{TableColumns}}
 - Content: {{TableContent}}
+
+Gold Description:
+
+{{GoldDescription}}
 
 Generated Description:
 
