@@ -1,43 +1,31 @@
-You will be given a system-generated description and a table. Your task is to evaluate the system-generated description based on four categories: Entailed, Extra, Incorrect, and Hallucinated. Please make sure you read and understand these instructions carefully. Keep this document open while reviewing, and refer to it as needed.
+You will be given a table description and a system-generated description for the same table.
 
-Evaluation Criteria:
+First, split both the gold description and the generated description into individual sentences.
 
-Entailed: A statement in the system-generated description is entailed by the gold description. In other words, it is equivalent to a statement in the gold description.
+Then, for each generated sentence, classify it into one of the following four categories:
 
-Extra: A statement in the system-generated description is not entailed by the gold description but is correct based on the table's content.
-
-Incorrect: A statement in the system-generated description is related to the table but is factually incorrect.
-
-Hallucinated: A statement in the system-generated description is unrelated to the table's content.
-
+- **Entailed**: The generated sentence is equivalent to one of the sentences in the gold description.
+- **Extra**: The generated sentence is not present in the gold description but is factually correct based on the table's content.
+- **Incorrect**: The generated sentence is related to the table but factually incorrect.
+- **Hallucinated**: The generated sentence is unrelated to the table.
 
 Evaluation Steps:
 
-1. Read the table carefully and identify the key information.
-2. Read the system-generated description and compare it to the table.
-3. For each statement in the system-generated description:
-Check if the statement is entailed by the gold description.
-If not entailed, check if the statement is correct based on the table (Extra).
-Mark any statement that is related to the table but factually incorrect (Incorrect).
-Mark any statement that is irrelevant to the table (Hallucinated).
-4. Assign the appropriate label (Entailed, Extra, Incorrect, Hallucinated) to each statement in the system-generated description.
-
+1. Split the gold description and the generated description into sentences.
+2. Compare each generated sentence with the gold description sentences.
+3. Classify each generated sentence into one of the categories: Entailed, Extra, Incorrect, or Hallucinated.
+4. Return the classification for each sentence in the generated description, **only the classification label**.
 
 Example:
 
-Table Content: 
-
-{{Table}}
-
-Gold Description: 
+Gold Description:
 
 {{GoldDescription}}
 
-System-Generated Description: 
+Generated Description:
 
 {{GeneratedDescription}}
 
-Evaluation Form (For each statement, indicate one of the following: Entailed, Extra, Incorrect, Hallucinated.):
+Evaluation Form (for each sentence in the generated description):
 
-- Label:
-
+- Entailed / Extra / Incorrect / Hallucinated:
