@@ -4,6 +4,8 @@ import argparse
 import tqdm
 import time
 from nltk.tokenize import sent_tokenize  # NLTK 문장 분해기 사용
+import nltk
+nltk.download('punkt_tab')
 
 def classify_sentences(prompt_template, table_info, generated_description, model, api_key):
     """GPT-4를 사용해 문장을 테이블과 비교하여 Entailed, Extra, Incorrect, Hallucinated로 분류"""
