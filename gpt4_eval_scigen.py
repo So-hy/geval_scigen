@@ -24,8 +24,8 @@ def classify_sentences(prompt_template, table_info, generated_description, model
     response = openai.ChatCompletion.create(
         model=model,
         messages=[{"role": "system", "content": prompt}],
-        temperature=0,  # 창의성 줄이기
-        max_tokens=500,  # 충분히 긴 응답을 받기 위해 토큰 제한을 높게 설정
+        temperature=0,
+        max_tokens=500,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
