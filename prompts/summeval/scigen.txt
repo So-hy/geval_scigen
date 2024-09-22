@@ -1,31 +1,35 @@
-You will be given a table description and a system-generated description for the same table.
+You will be given a table and a system-generated description for that table.
 
-First, split both the gold description and the generated description into individual sentences.
+Your task is to evaluate how well each sentence in the system-generated description matches the information presented in the table.
 
-Then, for each generated sentence, classify it into one of the following four categories:
+Please read and understand these instructions carefully. Refer to this document while reviewing as needed.
 
-- **Entailed**: The generated sentence is equivalent to one of the sentences in the gold description.
-- **Extra**: The generated sentence is not present in the gold description but is factually correct based on the table's content.
+Evaluation Criteria:
+
+- **Entailed**: The generated sentence is factually correct based on the table's content.
+- **Extra**: The generated sentence is factually correct but introduces additional information not present in the table.
 - **Incorrect**: The generated sentence is related to the table but factually incorrect.
-- **Hallucinated**: The generated sentence is unrelated to the table.
+- **Hallucinated**: The generated sentence is unrelated to the table's content.
 
 Evaluation Steps:
 
-1. Split the gold description and the generated description into sentences.
-2. Compare each generated sentence with the gold description sentences.
-3. Classify each generated sentence into one of the categories: Entailed, Extra, Incorrect, or Hallucinated.
-4. Return the classification for each sentence in the generated description, **only the classification label**.
+1. Read the table and understand its content.
+2. Split the system-generated description into individual sentences.
+3. Compare each sentence in the system-generated description to the content of the table.
+4. Classify each sentence into one of the following categories: Entailed, Extra, Incorrect, or Hallucinated.
 
 Example:
 
-Gold Description:
+Table:
 
-{{GoldDescription}}
+- Caption: {{TableCaption}}
+- Columns: {{TableColumns}}
+- Content: {{TableContent}}
 
 Generated Description:
 
 {{GeneratedDescription}}
 
-Evaluation Form (for each sentence in the generated description):
+Evaluation Form (classification labels ONLY):
 
 - Entailed / Extra / Incorrect / Hallucinated:
