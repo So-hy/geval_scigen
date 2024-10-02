@@ -1,0 +1,34 @@
+Given the following table and its explanation, break down the explanation into individual sentences and classify each sentence based on the category of reasoning used to generate it from the table.
+
+
+Table:
+{{table_info}}
+
+Explanation:
+{{description}}
+
+
+The categories are as follows:
+
+
+Descriptive Statistics
+Comparison and Contrast
+Trend and Pattern Analysis
+Proportional and Percentage Calculations
+Data Manipulation and Calculation
+Causal Relationships and Evaluation
+If a sentence belongs to multiple categories, include it in all applicable categories.
+
+Break down the explanation into individual sentences.
+For each sentence, determine the appropriate category (or categories) based on how it relates to the table.
+Place each classified sentence in the corresponding category list.
+The final output must be in the following format:
+
+Descriptive Statistics: ["sentence 1", "sentence 2", ...]
+Comparison and Contrast: ["sentence 3", ...]
+Trend and Pattern Analysis: ["sentence 4", ...]
+Proportional and Percentage Calculations: ["sentence 1", ...]
+Data Manipulation and Calculation: ["sentence 3", ...]
+Causal Relationships and Evaluation: ["sentence 5", ...]
+
+Note: Output strictly in the exact format above without any additional explanations or commentary.
